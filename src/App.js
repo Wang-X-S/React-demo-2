@@ -1,26 +1,38 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.PureComponent { 
+  divRef = undefined
+  constructor(props) { 
+    super(props)
+    this.state = {
+      n: 1,
+      array: [1, 2, 3],
+      width:null
+    }
+    this.divRef = React.createRef()
+  }
+  onClick = () => {
+    this.setState(state => ({
+      n: state.n+1
+    }))
+
+  }
+  componentDidMount() { 
+    // const div = document.getElementById('xxx')
+    // const width = div.getBoundingClientRect().width
+    // this.setState({ width })
+    
+    const div = this.divRef.current
+    const width = div.getBoundingClientRect().width
+    this.setState({width})
+  }
+  render() {
+    return (
+      
+      <div ref={this.divRef}>Hellow World,{this.state.width}</div>
+     
+    )
+
+  }
 }
-
 export default App;
